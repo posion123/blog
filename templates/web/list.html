@@ -27,7 +27,7 @@
         {% if articles %}
             {% for article in articles1 %}
                 <li>
-                    <h3><a href="">{{ article.title }}</a></h3>
+                    <h3><a href="{% url 'app:info' article.id %}">{{ article.title }}</a></h3>
                     <p>{{ article.desc }}</p>
                 </li>
             {% endfor %}
