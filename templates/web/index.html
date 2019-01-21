@@ -1,0 +1,46 @@
+
+{% extends 'web/base_main.html' %}
+
+{% block title %}
+  周海龙个人博客
+{% endblock %}
+
+{% block extcss %}
+  {% load static %}
+  <link href="{% static 'web/css/base.css' %}" rel="stylesheet">
+  <link href="{% static 'web/css/index.css' %}" rel="stylesheet">
+  <link href="{% static 'web/css/m.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extjs %}
+  {% load static %}
+    {{ block.super }}
+  <script type="text/javascript" src="{% static 'web/js/comm.js' %}"></script>
+  <script src="{% static 'web/js/modernizr.js' %}"></script>
+{% endblock %}
+
+
+{% block aboutme %}
+<div class="about_me">
+    <h2>关于我</h2>
+    <ul>
+        <i style="width:50%; height:50%;"><img src="/static/web/images/1.jpg"></i>
+        <p><b>周海龙</b>，一个在在校大学生,为了生活,不得不去让自己努力,通过这个博客开始记录自己的点点滴滴</p>
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block main %}
+    <main class="r_box">
+        {% for article in articles1 %}
+            <li>
+                <h3>标题:<a href="{% url 'app:info' article.id %}">{{ article.title }}</a></h3>
+                <p>文章描述:{{ article.desc }}</p>
+            </li>
+        {% endfor %}
+    </main>
+
+{% endblock %}
+
+

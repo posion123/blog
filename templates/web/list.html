@@ -1,0 +1,42 @@
+
+{% extends 'web/base_main.html' %}
+
+{% block title %}
+  王海飞个人博客 - 一个肥宅的个人博客网站
+{% endblock %}
+
+{% block extcss %}
+  {% load static %}
+  <link href="{% static 'web/css/base.css' %}" rel="stylesheet">
+  <link href="{% static 'web/css/index.css' %}" rel="stylesheet">
+  <link href="{% static 'web/css/m.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extjs %}
+     {% load static %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'web/js/comm.js' %}"></script>
+    <script src="{% static 'web/js/modernizr.js' %}"></script>
+    <script type="text/javascript" src="{% static 'web/js/hc-sticky.js' %}"></script>
+{% endblock %}
+
+
+{% block main %}
+
+    <main class="r_box">
+        {% if articles %}
+            {% for article in articles1 %}
+                <li>
+                    <h3><a href="">{{ article.title }}</a></h3>
+                    <p>{{ article.desc }}</p>
+                </li>
+            {% endfor %}
+
+        {% else %}
+            <p>还没发布文章呢</p>
+        {% endif %}
+
+
+    </main>
+
+{% endblock %}

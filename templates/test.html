@@ -1,0 +1,25 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}
+    文章编辑页面
+{% endblock %}
+
+{% block content %}
+
+
+
+            {% for data in all_data2 %}
+              <tr>
+                <td><input type="checkbox" class="input-control" name="checkbox[]" value="{{ data.id }}" /></td>
+                <td class="article-title">{{ data.title }}</td>
+                <td>{{ data.child.f.f_name }}</td>
+                <td class="hidden-sm">{{ data.child.c_name }}</td>
+                <td class="hidden-sm">{{ data.id }}</td>
+                <td>{{ data.s_time }}</td>
+                <td><a href="">修改</a> <a href="{% url 'article:del_article' data.id %}">删除</a></td>
+                <br>
+              </tr>
+              {% endfor %}
+
+
+{% endblock %}
