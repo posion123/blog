@@ -45,7 +45,7 @@
 <section class="container-fluid">
   <div class="row">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="position:absolute;">
-      <form action="/Article/checkAll" method="post" style="margin: 66px 0 20px;" >
+      <form action="/Article/checkAll" method="post"  >
         <h1 class="page-header">操作</h1>
         <ol class="breadcrumb">
           <li><a href="/article/edit_article">增加文章</a></li>
@@ -106,7 +106,7 @@
               </li>
               <li>
               {% if all_data2.has_next %}
-              <a href="{% url 'user:all_index' %}?page{{ all_data2.next_page_number }}">下一页</a>
+              <a href="{% url 'user:all_index' %}?page={{ all_data2.next_page_number }}">下一页</a>
               {% endif %}
               </li>
             </ul>

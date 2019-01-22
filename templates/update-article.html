@@ -7,12 +7,12 @@
 <section class="container-fluid">
 
   <div class="row">
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="margin-left: 0%;">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" >
       <div class="row">
         <form action="" method="post" class="add-article-form">
           {% csrf_token %}
           <div class="col-md-9">
-            <h1 class="page-header" style="line-height: 3.1;">撰写新文章</h1>
+            <h1 class="page-header" >撰写新文章</h1>
                         <div class="form-group">
               <label for="article-title" class="sr-only" >标题</label>
               <input type="text" id="article-title" name="title" value="{{ user.title }}" class="form-control" placeholder="在此处输入标题" required autofocus autocomplete="off">
@@ -29,7 +29,7 @@
                 </script>
 
 
-                内容：<textarea id="editor_id" name="content" style="width:100%">{{ user.content }}</textarea>
+                内容：<textarea id="editor_id" name="content" >{{ user.content }}</textarea>
 
 
             <div class="form-group">
@@ -40,7 +40,7 @@
               <h2 class="add-article-box-title"><span>描述</span></h2>
               <div class="add-article-box-content">
               	<textarea class="form-control" name="describe" autocomplete="off">{{ user.desc }}</textarea>
-                  <button class="btn btn-primary" type="submit" name="submit" style="margin:10px">更新</button>
+                  <button class="btn btn-primary" type="submit" name="submit" >更新</button>
               </div>
             </div>
           </div>
