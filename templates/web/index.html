@@ -35,8 +35,9 @@
     <main class="r_box">
         {% for article in articles1 %}
             <li>
+                 <img style="width:200px; height:100px" src="/media/{{ article.icon }}" alt="">
                 <h3>标题:<a href="{% url 'app:info' article.id %}">{{ article.title }}</a></h3>
-                <p>文章描述:{{ article.desc }}</p>
+                文章描述:{{ article.desc }}
             </li>
         {% endfor %}
     </main>

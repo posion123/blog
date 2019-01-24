@@ -2,7 +2,7 @@
 {% extends 'web/base_main.html' %}
 
 {% block title %}
-  王海飞个人博客 - 一个肥宅的个人博客网站
+  周海龙
 {% endblock %}
 
 {% block extcss %}
@@ -24,19 +24,34 @@
 {% block main %}
 
     <main class="r_box">
-        {% if articles %}
-            {% for article in articles1 %}
+        {% for article in all_article %}
                 <li>
+                    <img style="width:200px; height:100px" src="/media/{{ article.icon }}" alt="">
                     <h3><a href="{% url 'app:info' article.id %}">{{ article.title }}</a></h3>
                     <p>{{ article.desc }}</p>
                 </li>
-            {% endfor %}
+        {% endfor %}
 
-        {% else %}
-            <p>还没发布文章呢</p>
+
+        {% for article in articles2 %}
+            <li>
+                <img style="width:200px; height:100px" src="/media/{{ article.icon }}" alt="">
+                <h3><a href="{% url 'app:info' article.id %}">{{ article.title }}</a></h3>
+                <p>{{ article.desc }}</p>
+            </li>
+        {% endfor %}
+
+        {% if articles2.has_previous %}
+            <a href="{% url 'app:list' %}?page={{ articles2.previous_page_number }}">上一页</a>
         {% endif %}
 
+        {% for i in articles2.paginator.page_range%}
+        <a href="{% url 'app:list' %}?page={{ i }}">{{ i }}</a>
+        {% endfor %}
 
+        {% if articles2.has_next %}
+            <a href="{% url 'app:list' %}?page={{ articles2.next_page_number }}">下一页</a>
+        {% endif %}
     </main>
 
 {% endblock %}

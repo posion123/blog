@@ -17,6 +17,8 @@ from django.contrib import admin
 
 from django.urls import path, include, re_path
 from django.contrib.staticfiles.urls import static
+
+from app import views
 from blogback.settings import MEDIA_URL, MEDIA_ROOT
 from utils.upload_images import upload_image
 
@@ -27,6 +29,7 @@ urlpatterns = [
     path('article/', include(('article.urls', 'article'), namespace='article')),
     # kindeditor编辑器上传图片地址
     re_path(r'^util/upload/(?P<dir_name>[^/]+)$', upload_image, name='upload_image'),
+    path('', views.index)
 ]
 
 # 配置media访问路径

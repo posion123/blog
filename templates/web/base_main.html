@@ -33,17 +33,19 @@
         </div>
         <div class="fenlei">
             <h2>文章分类</h2>
-            {% for article in articles %}
-
-            <p><a href="">{{ article.c_name }}({{article.article_set.count}})</a></p>
-
-            {% endfor %}
             <ul class="types_class">
+            {% for article in articles %}
+                <p><a href="{% url 'app:my_list' article.id %}">{{ article.c_name }}({{article.article_set.count}})</a></p>
+            {% endfor %}
+                <a href="/app/list/">所有文章</a>
             </ul>
         </div>
         <div class="tuijian">
           <h2>站长推荐</h2>
           <ul class="tuijian_class">
+            {% for article in articles1 %}
+              <p><a href="{% url 'app:info' article.id %}">{{ article.title }}</a></p>
+            {% endfor %}
           </ul>
         </div>
     </aside>

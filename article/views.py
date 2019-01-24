@@ -25,14 +25,18 @@ def edit_article(request):
         content = request.POST.get('content')
         desc = request.POST.get('describe')
         category = request.POST.get('category')
+        icon = request.FILES.get('titlepic')
         # 使用all()方法进行判断，如果文章标题和内容任何一个参数没有填写，则返回错误信息
         child = ChildTechnology.objects.filter(id=category).first()
+
         Article.objects.create(title=title,
                                content=content,
                                desc=desc,
-                               child_id=child.id)
+                               child_id=child.id,
+                               father_id=child.f_id,
+                               icon=icon)
         # 创建文章成功后，跳转到文章列表页面
-        return HttpResponseRedirect(reverse('article:article'))
+        return HttpResponseRedirect(reverse('user:index'))
 
 
 def article(request):

@@ -22,5 +22,6 @@ class Article(models.Model):
     s_time = models.DateTimeField(auto_now_add=True)
     child = models.ForeignKey(ChildTechnology, on_delete=models.CASCADE)
     father = models.ForeignKey(FatherTechnology, on_delete=models.CASCADE)
+    icon = models.ImageField(upload_to='upload', null=True)
     class Meta:
         db_table = 'article'
