@@ -7,7 +7,9 @@
       <h2 id="mnavh"><span class="navicon"></span></h2>
       <ul id="starlist">
         <li><a href="/app/index/">网站首页</a></li>
+        <li><a href="/app/all_photoes/">我的相册</a></li>
         <li><a href="/app/list/">我的日记</a></li>
+        <li><a href="/app/message/">留言</a></li>
         <li><a href="/app/about/">关于我</a></li>
       </ul>
   </nav>
@@ -31,6 +33,16 @@
             <input class="input_submit" value="搜索" type="submit">
           </form>
         </div>
+        {% if photoes %}
+            <div class="wdxc">
+            <h2>我的相册</h2>
+            <ul>
+                {% for photo in photoes %}
+              <li><a href="">{{ photo | safe }}</a></li>
+                {% endfor %}
+            </ul>
+            </div>
+        {% endif %}
         <div class="fenlei">
             <h2>文章分类</h2>
             <ul class="types_class">

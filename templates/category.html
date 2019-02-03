@@ -84,7 +84,7 @@ $(function(){
                   <td>{{ data.f_name }}</td>
                   <td>{{ data.f_alias }}</td>
                   <td> {{ data.childtechnology_set.all.count }} </td>
-                  <td><a href="">修改</a> <a href="{% url 'article:del_category' data.id %}">删除</a></td>
+                  <td><a href="{% url 'article:up_category' data.id %}">修改</a> <a href="{% url 'article:del_category' data.id %}">删除</a></td>
                     <br>
                 </tr>
               {% endfor %}

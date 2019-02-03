@@ -4,6 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 
+from app.models import Message
 from article.models import Article, FatherTechnology, ChildTechnology
 
 
@@ -13,6 +14,8 @@ from article.models import Article, FatherTechnology, ChildTechnology
 #     if request.method == 'POST':
 #         return HttpResponseRedirect(reverse('edit.html'))
 
+
+# 编辑文章
 def edit_article(request):
     """
     文章编辑方法
@@ -39,6 +42,7 @@ def edit_article(request):
         return HttpResponseRedirect(reverse('user:index'))
 
 
+# 显示所有文章
 def article(request):
     if request.method == 'GET':
         # 获取所有的文章
@@ -46,6 +50,7 @@ def article(request):
         return render(request, 'article.html', {'articles': articles})
 
 
+# 获取栏目
 def category(request):
     if request.method == 'GET':
         return all_category(request)
@@ -91,22 +96,28 @@ def category(request):
 
             return HttpResponseRedirect(reverse('article:category'))
 
+# 显示所有栏目
 def all_category(request):
     all_data = FatherTechnology.objects.all()
+    mess = Message.objects.filter(answer__isnull=True)
+    mess1 = len(mess)
+    return render(request, 'category.html', {'all_data': all_data, 'mess1': mess1})
 
-    return render(request, 'category.html', {'all_data': all_data})
 
-
+# 显示所有子栏目
 def all_edit(request):
     all_data = ChildTechnology.objects.all()
+    mess = Message.objects.filter(answer__isnull=True)
+    mess1 = len(mess)
+    return render(request, 'add-article.html', {'all_data': all_data, 'mess1': mess1})
 
-    return render(request, 'add-article.html', {'all_data': all_data})
-
+# 删除文章
 def del_article(request, id):
         Article.objects.filter(pk=id).delete()
         return HttpResponseRedirect(reverse('user:index'))
 
 
+# 修改文章
 def up_article(request, id):
     if request.method == 'GET':
         user = Article.objects.filter(pk=id).first()
@@ -132,11 +143,34 @@ def up_article(request, id):
 #         return HttpResponseRedirect(reverse('user:index'))
 
 
+# 删除栏目
 def del_category(request, id):
     FatherTechnology.objects.filter(pk=id).delete()
     return HttpResponseRedirect(reverse('article:category'))
 
 
+#修改栏目
+def up_category(request, id):
+    if request.method == 'GET':
+        categorys = FatherTechnology.objects.filter(pk=id).first()
+        all_data = FatherTechnology.objects.all()
+        mess = Message.objects.filter(answer__isnull=True)
+        mess1 = len(mess)
+        return render(request, 'update-category.html', {'categorys': categorys, 'all_data': all_data, 'mess1': mess1})
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        alias = request.POST.get('alias')
+        fid = request.POST.get('sel')
+        describe = request.POST.get('describe')
+        category = FatherTechnology.objects.filter(pk=id).first()
+        category.f_name = name
+        category.f_alias = alias
+        category.f_desc = describe
+        category.save()
+        return HttpResponseRedirect(reverse('article:category'))
+
+# 测试
 def look(request):
     all_data2 = Article.objects.all()
     return render(request, 'test.html', {'all_data2':all_data2})

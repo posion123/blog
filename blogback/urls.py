@@ -29,7 +29,9 @@ urlpatterns = [
     path('article/', include(('article.urls', 'article'), namespace='article')),
     # kindeditor编辑器上传图片地址
     re_path(r'^util/upload/(?P<dir_name>[^/]+)$', upload_image, name='upload_image'),
-    path('', views.index)
+    path('', views.index),
+    path('photo/', include(('photo.urls', 'photo'), namespace='photo')),
+    path('message/', include(('message.urls', 'message'), namespace='message')),
 ]
 
 # 配置media访问路径

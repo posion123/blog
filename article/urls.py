@@ -11,6 +11,8 @@ urlpatterns = [
     path('category/', views.category, name='category'),
     #显示栏目
     path('all_category/', views.all_category, name='all_category'),
+    # 修改栏目
+    path('up_category/<int:id>/', views.up_category, name='up_category'),
     #添加文章
     path('all_edit/', views.all_edit, name='all_edit'),
     #删除文章
