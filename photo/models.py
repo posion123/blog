@@ -10,3 +10,10 @@ class Photoes(models.Model):
 
     class Meta:
         db_table = 'photo'
+
+class Mfile(models.Model):
+    title = models.CharField(max_length=100)
+    name = models.FileField(upload_to='file2', null=True)
+    time = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        db_table = 'my_file'

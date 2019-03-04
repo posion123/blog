@@ -15,18 +15,11 @@
 {% block content %}
 
 <article>
-  <div class="picbox">
-        {% for photo in photoes %}
-      <ul>
-       <li data-scroll-reveal="enter bottom over 1s" ><a href="{% url 'app:person_photoes' photo.3 %}"><i>{{ photo.0 | safe }}</i>
-        <div class="picinfo">
-          <h3>{{ photo.1 }}</h3>
-          <span>{{ photo.2 }}</span> </div>
-        </a></li>
-    </ul>
-      {% endfor %}
+  <div class="pagelist">
+      {% for i in nums %}
+      <a href="{% url 'app:'app:person_photoes' {{ id }} %}?page={{ i }}" class="curPage">{{ i }} </a>
+    {% endfor %}
   </div>
-  <div class="pagelist">&nbsp;<a href="#" class="curPage">1</a></div>
 </article>
 {% endblock %}
 

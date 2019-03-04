@@ -47,8 +47,23 @@ def info(request, id):
         article = Article.objects.filter(pk=id).first()
         child = article.child_id
         cate = ChildTechnology.objects.filter(pk=child).first()
+        cate1 = cate.article_set.all()
+        index1 = []
+        # 获取当前文章在文章列表中的位置
+        for i in range(len(cate1)):
+            if article == cate1[i]:
+                index1.append(i)
+                break
+        # 在列表的第一个位置
+        if not index1[0]:
+            cate1 = cate1[index1[0]: index1[0] + 2]
+
+        # 不在文章的第一个位置
+        elif index1[0]:
+            cate1 = cate1[index1[0] - 1: index1[0] + 2]
+
         articles1 = Article.objects.all()[:6]
-        return render(request, 'web/info.html', {'article': article, 'cate':cate, 'articles':articles,'articles1':articles1})
+        return render(request, 'web/info.html', {'article': article, 'cate':cate, 'cate1':cate1, 'articles':articles,'articles1':articles1, 'id':id})
 
 #显示所有文章
 def list(request):
@@ -69,7 +84,7 @@ def my_list(request, id):
         all_article = c_article.article_set.all()
         articles1 = Article.objects.all()[:6]
         articles = ChildTechnology.objects.all()
-        return render(request, 'web/list.html', {'all_article':all_article,'articles1':all_article, 'articles':articles})
+        return render(request, 'web/list.html', {'all_article':all_article,'articles1':articles1, 'articles':articles})
 
 
 # 显示所有相册信息
@@ -85,14 +100,29 @@ def all_photoes(request):
 def person_photoes(request, id):
     if request.method == 'GET':
         photoes=[]
+        page = int(request.GET.get('page', 1))
         photoes1 = Photoes.objects.filter(pk=id).first()
         photoes2 = str(photoes1.content)
         photoes3 = photoes2.split('>')
         for p in photoes3:
             photoes.append(p + '>')
         photoes = photoes[:len(photoes)-1]
-        return render(request, 'web/all_photoes.html', {'photoes': photoes})
+        nums = []
+        num = len(photoes) // 8 + 1
+        for i in range(1, num + 1):
+            nums.append(i)
+        photoes = photoes[(page-1) * 8: (page * 8)]
 
+        return render(request, 'web/all_photoes.html', {'photoes': photoes, 'nums':nums, 'id':id})
+
+# 搜索页面
+def search(request):
+    if request.method == 'GET':
+        title = request.GET.get('search_params')
+        articles = ChildTechnology.objects.all()
+        articles1 = Article.objects.all()[:6]
+        articles2 = Article.objects.filter(title__contains=title).all()
+        return render(request, 'web/list.html', {'articles':articles, 'articles1':articles1,'articles2':articles2})
 # 留言
 def message(request):
     if request.method == 'GET':

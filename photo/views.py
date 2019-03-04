@@ -11,7 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from app.models import Message
-from photo.models import Photoes
+from photo.models import Photoes, Mfile
 
 
 # 相册列表
@@ -64,6 +64,19 @@ def up_photoes(request, id):
         photo.desc = desc
         photo.save()
         return HttpResponseRedirect(reverse('photo:photoes'))
+
+# 文件操作
+def my_file(request):
+    if request.method == 'GET':
+        files = Mfile.objects.all()
+        return render(request, 'my_file.html', {'files':files})
+    if request.method == 'POST':
+
+        name = request.FILES.get('pic')
+        title = str(name)
+        Mfile.objects.create(name=name, title=title)
+        return HttpResponseRedirect(reverse('photo:my_file'))
+
 # 测试
 def test(request):
     if request.method == 'GET':

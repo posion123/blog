@@ -22,7 +22,13 @@
     </ul>
       {% endfor %}
   </div>
-  <div class="pagelist"><a class="allpage"><b>99</b></a>&nbsp;&nbsp;<a href="#" class="curPage">1</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">2</a>&nbsp;&nbsp;<a href="#" onclick="page(3)">3</a>&nbsp;&nbsp;<a href="#" onclick="page(4)">4</a>&nbsp;&nbsp;<a href="#" onclick="page(5)">5</a>&nbsp;&nbsp;<a href="#" onclick="page(6)">6</a>&nbsp;&nbsp;<a href="#" onclick="page(7)">7</a>&nbsp;&nbsp;<a href="#" onclick="page(8)">8</a>&nbsp;&nbsp;<a href="#" onclick="page(9)">9</a>&nbsp;&nbsp;<a href="#" onclick="page(2)">下一页</a></div>
+
+  <div class="pagelist">
+      {% for i in nums %}
+      <a href="{% url 'app:person_photoes' id %}?page={{ i }}" class="curPage">{{ i }} </a>
+    {% endfor %}
+     <a href="{% url 'app:all_photoes' %}" class="curPage">返回 </a>
+  </div>
 </article>
 {% endblock %}
 

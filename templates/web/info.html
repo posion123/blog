@@ -40,8 +40,21 @@
                 <div class="news_about">
                    {{ article.content|safe }}
                 </div>
-
             </div>
+            <br>
+            <br>
+            <br>
+                {% for ca in cate1 %}
+                    <div class="news_about">
+                    {% if ca.id > id %}
+                        <a href="{% url 'app:info' ca.id %}">下一篇&emsp;{{ ca.title }}</a>
+                    {% endif %}
+
+                    {% if ca.id < id %}
+                        <a href="{% url 'app:info' ca.id %}">上一篇&emsp;{{ ca.title }}</a>
+                    {% endif %}
+                    </div>
+                {% endfor %}
         </div>
     </main>
 
