@@ -68,14 +68,23 @@ def up_photoes(request, id):
 # 文件操作
 def my_file(request):
     if request.method == 'GET':
+        mess = Message.objects.filter(answer__isnull=True)
+        mess1 = len(mess)
         files = Mfile.objects.all()
-        return render(request, 'my_file.html', {'files':files})
+        return render(request, 'my_file.html', {'files':files, 'mess1':mess1})
     if request.method == 'POST':
 
         name = request.FILES.get('pic')
         title = str(name)
         Mfile.objects.create(name=name, title=title)
         return HttpResponseRedirect(reverse('photo:my_file'))
+
+# 文件删除
+def del_my_file(request, id):
+    if request.method == 'GET':
+        Mfile.objects.filter(pk=id).delete()
+        return HttpResponseRedirect(reverse('photo:my_file'))
+
 
 # 测试
 def test(request):
